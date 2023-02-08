@@ -1,7 +1,9 @@
 import 'package:fake_store/constants.dart';
+import 'package:fake_store/responsive_layouts/mobile/mobile_scaffold.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:get/get.dart';
 
 import 'package:iconsax/iconsax.dart';
 import 'package:share_plus/share_plus.dart';
@@ -45,33 +47,90 @@ class _ItemDetailsViewState extends State<ItemDetailsView> {
     super.initState();
   }
 
+  final scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height * 0.35;
+    // var height = MediaQuery.of(context).size.height * 0.35;
     var width = MediaQuery.of(context).size.width;
 
     return Scaffold(
+      key: scaffoldKey,
+      drawer: myDrawer,
       appBar: AppBar(
+        toolbarHeight: 80,
+        leading: const SizedBox(),
+        title: Center(
+          child: Neumorphic(
+            style:
+                const NeumorphicStyle(boxShape: NeumorphicBoxShape.stadium()),
+            child: Container(
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(25)),
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Text(
+                    widget.upperCased.toString(),
+                    style: TextStyle(fontSize: 20, color: Colors.grey[800]),
+                  ),
+                )),
+          ),
+        ),
         backgroundColor: Colors.transparent,
         elevation: 0,
-        actions: const [
+        actions: [
           Padding(
-            padding: EdgeInsets.only(right: 15.0),
-            child: Icon(
-              Icons.favorite,
-              color: Colors.red,
-            ),
-          )
+              padding: const EdgeInsets.only(right: 5.0, bottom: 15, top: 15),
+              child: NeumorphicButton(
+                onPressed: () {
+                  if (scaffoldKey.currentState!.isDrawerOpen) {
+                    scaffoldKey.currentState!.closeDrawer();
+                    //close drawer, if drawer is open
+                  } else {
+                    scaffoldKey.currentState!.openDrawer();
+                    //open drawer, if drawer is closed
+                  }
+                },
+                provideHapticFeedback: true,
+                style: NeumorphicStyle(
+                    shadowLightColor: Colors.white.withOpacity(0.6),
+                    color: Colors.white,
+                    boxShape: const NeumorphicBoxShape.circle()),
+                child: Icon(
+                  Icons.menu_rounded,
+                  color: Colors.grey[800],
+                  size: 30,
+                ),
+              )),
+          Padding(
+              padding: const EdgeInsets.only(right: 15.0, bottom: 15, top: 15),
+              child: NeumorphicButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                provideHapticFeedback: true,
+                style: NeumorphicStyle(
+                    shadowLightColor: Colors.white.withOpacity(0.6),
+                    color: Colors.white,
+                    boxShape: const NeumorphicBoxShape.circle()),
+                child: Icon(
+                  Icons.arrow_back_outlined,
+                  color: Colors.grey[800],
+                  size: 30,
+                ),
+              )),
         ],
       ),
-      drawer: myDrawer,
-      backgroundColor: defBgColor,
+      backgroundColor: Colors.white.withOpacity(0.95),
       body: Container(
-          color: Colors.white,
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
+          decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(25), topLeft: Radius.circular(25))),
           child: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [

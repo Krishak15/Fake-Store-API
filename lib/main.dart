@@ -6,6 +6,7 @@ import 'package:fake_store/responsive_layouts/responsive_layout.dart';
 import 'package:fake_store/responsive_layouts/tablet_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.dark,
     ));
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Fake Store API',
       theme: ThemeData(

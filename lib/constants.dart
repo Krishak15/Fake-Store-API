@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
-var defBgColor = Colors.grey[900];
+var defBgColor = Colors.white70;
 
 var myAppBar = AppBar(
   backgroundColor: Colors.transparent,
