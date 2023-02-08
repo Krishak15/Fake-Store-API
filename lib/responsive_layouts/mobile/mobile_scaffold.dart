@@ -3,13 +3,13 @@ import 'dart:async';
 import 'package:fake_store/constants.dart';
 import 'package:fake_store/controllers/data_controller.dart';
 import 'package:fake_store/responsive_layouts/mobile/itemdetails_mobile.dart';
+import 'package:fake_store/responsive_layouts/mobile/search_items.dart';
 import 'package:fake_store/utils/tiles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:get/get.dart';
 
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_instance/src/extension_instance.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
 class MobileScaffol extends StatefulWidget {
@@ -72,8 +72,91 @@ class _MobileScaffolState extends State<MobileScaffol> {
     final itemController = Get.put(DataController());
     return Scaffold(
       key: _scaffoldKey,
-      backgroundColor: defBgColor,
-      appBar: myAppBar,
+      backgroundColor: Colors.white.withOpacity(0.95),
+      appBar: AppBar(
+        toolbarHeight: 80,
+        title: Center(
+            child: Neumorphic(
+          style: const NeumorphicStyle(
+              lightSource: LightSource.top,
+              boxShape: NeumorphicBoxShape.stadium()),
+          child: Container(
+            decoration: BoxDecoration(
+                color: Colors.white, borderRadius: BorderRadius.circular(25)),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const SizedBox(
+                  width: 5,
+                ),
+                Text(
+                  "FakeStore",
+                  style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.grey[800]),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 5.0, bottom: 5),
+                  child: NeumorphicButton(
+                    onPressed: () {
+                      Get.to(() => SearchItems());
+                    },
+                    style: const NeumorphicStyle(
+                      depth: 4,
+                      intensity: 0.5,
+                      color: Colors.white,
+                      surfaceIntensity: 0.3,
+                      shape: NeumorphicShape.convex,
+                      lightSource: LightSource.topLeft,
+                      shadowDarkColor: Colors.black,
+                      boxShape: NeumorphicBoxShape.circle(),
+                    ),
+                    child: Icon(
+                      Iconsax.search_normal,
+                      color: Colors.grey[800],
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        )),
+        leading: const SizedBox(),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        actions: [
+          Padding(
+              padding: const EdgeInsets.only(right: 5.0, bottom: 14, top: 14),
+              child: NeumorphicButton(
+                tooltip: "Menu",
+                onPressed: () {
+                  if (_scaffoldKey.currentState!.isDrawerOpen) {
+                    _scaffoldKey.currentState!.closeDrawer();
+                    //close drawer, if drawer is open
+                  } else {
+                    _scaffoldKey.currentState!.openDrawer();
+                    //open drawer, if drawer is closed
+                  }
+                },
+                provideHapticFeedback: true,
+                style: NeumorphicStyle(
+                    depth: 5,
+                    surfaceIntensity: 0.3,
+                    intensity: 0.8,
+                    lightSource: LightSource.topLeft,
+                    shadowLightColor: Colors.white.withOpacity(0.6),
+                    color: Colors.white,
+                    shape: NeumorphicShape.convex,
+                    boxShape: const NeumorphicBoxShape.circle()),
+                child: Icon(
+                  Icons.menu_rounded,
+                  color: Colors.grey[800],
+                  size: 30,
+                ),
+              )),
+        ],
+      ),
       drawer: myDrawer,
       body: LiquidPullToRefresh(
         springAnimationDurationInMilliseconds: 1500,
