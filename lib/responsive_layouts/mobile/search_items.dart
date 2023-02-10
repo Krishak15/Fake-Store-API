@@ -1,6 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:fake_store/services/services.dart';
+
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
+// ignore: must_be_immutable
 class SearchItems extends StatefulWidget {
   String? title;
   String? image;
@@ -14,13 +16,7 @@ class SearchItems extends StatefulWidget {
 }
 
 class _SearchItemsState extends State<SearchItems> {
-  // final List<Map<String, dynamic>> _searchItems = [
-  //   {"image":
-
-  //   }
-  // ];
-
-  TextEditingController _textEditingController = TextEditingController();
+  final TextEditingController _textEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -80,14 +76,6 @@ class _SearchItemsState extends State<SearchItems> {
                   ),
                 )),
           ]),
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-                topRight: Radius.circular(25), topLeft: Radius.circular(25))),
-      ),
     );
   }
 }
