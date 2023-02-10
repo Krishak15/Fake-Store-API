@@ -1,16 +1,15 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
-class respLayouts extends StatelessWidget {
+class RespLayouts extends StatelessWidget {
   final Widget mobileScaffold;
   final Widget tabScaffold;
-  final Widget DesktopScaffold;
+  final Widget desktopScaffold;
 
-  respLayouts(
-      {required this.mobileScaffold,
+  const RespLayouts(
+      {super.key,
+      required this.mobileScaffold,
       required this.tabScaffold,
-      required this.DesktopScaffold});
+      required this.desktopScaffold});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +20,7 @@ class respLayouts extends StatelessWidget {
         } else if (constrains.maxWidth < 1100) {
           return tabScaffold;
         } else {
-          return DesktopScaffold;
+          return desktopScaffold;
         }
       },
     );

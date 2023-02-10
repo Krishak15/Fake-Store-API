@@ -13,10 +13,8 @@ class DataController extends GetxController {
     try {
       loading.value = true;
       var datas = await DataServices().getService();
-      if (datas != null) {
-        dataModels.value = datas;
-        loading.value = false;
-      }
+      dataModels.value = datas;
+      loading.value = false;
     } catch (e) {
       Get.snackbar("Error", "$e");
       loading.value = false;

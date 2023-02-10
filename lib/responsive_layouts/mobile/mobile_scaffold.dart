@@ -2,10 +2,9 @@ import 'dart:async';
 
 import 'package:fake_store/constants.dart';
 import 'package:fake_store/controllers/data_controller.dart';
+import 'package:fake_store/controllers/search_helper.dart';
 import 'package:fake_store/responsive_layouts/mobile/itemdetails_mobile.dart';
-import 'package:fake_store/responsive_layouts/mobile/search_items.dart';
 import 'package:fake_store/utils/tiles.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:get/get.dart';
 
@@ -100,7 +99,8 @@ class _MobileScaffolState extends State<MobileScaffol> {
                   padding: const EdgeInsets.only(top: 5.0, bottom: 5),
                   child: NeumorphicButton(
                     onPressed: () {
-                      Get.to(() => SearchItems());
+                      showSearch(context: context, delegate: SearchHelper());
+                      // Get.to(() => SearchItems());
                     },
                     style: const NeumorphicStyle(
                       depth: 4,

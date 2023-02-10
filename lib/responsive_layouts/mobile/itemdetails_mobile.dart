@@ -1,9 +1,6 @@
 import 'package:fake_store/constants.dart';
-import 'package:fake_store/responsive_layouts/mobile/mobile_scaffold.dart';
 import 'package:flip_card/flip_card.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:get/get.dart';
 
 import 'package:iconsax/iconsax.dart';
 import 'package:share_plus/share_plus.dart';
@@ -71,7 +68,7 @@ class _ItemDetailsViewState extends State<ItemDetailsView> {
                   padding: const EdgeInsets.all(12.0),
                   child: Text(
                     widget.upperCased.toString(),
-                    style: TextStyle(fontSize: 20, color: Colors.grey[800]),
+                    style: TextStyle(fontSize: 14, color: Colors.grey[800]),
                   ),
                 )),
           ),

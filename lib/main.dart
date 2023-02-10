@@ -1,5 +1,5 @@
 import 'package:fake_store/responsive_layouts/desktop_scaffold.dart';
-import 'package:fake_store/responsive_layouts/mobile/itemdetails_mobile.dart';
+
 import 'package:fake_store/responsive_layouts/mobile/mobile_scaffold.dart';
 
 import 'package:fake_store/responsive_layouts/responsive_layout.dart';
@@ -22,16 +22,17 @@ class MyApp extends StatelessWidget {
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.dark,
     ));
+
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Fake Store API',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.purple,
       ),
-      home: respLayouts(
+      home: const RespLayouts(
           mobileScaffold: MobileScaffol(),
-          tabScaffold: const TabletScaffold(),
-          DesktopScaffold: const DesktopScaffold()),
+          tabScaffold: TabletScaffold(),
+          desktopScaffold: DesktopScaffold()),
     );
   }
 }
