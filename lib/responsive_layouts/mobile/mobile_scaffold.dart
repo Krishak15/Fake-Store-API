@@ -4,8 +4,10 @@ import 'package:fake_store/constants.dart';
 import 'package:fake_store/controllers/data_controller.dart';
 import 'package:fake_store/controllers/search_helper.dart';
 import 'package:fake_store/responsive_layouts/mobile/itemdetails_mobile.dart';
+import 'package:fake_store/utils/grids.dart';
 import 'package:fake_store/utils/tiles.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+
 import 'package:get/get.dart';
 
 import 'package:iconsax/iconsax.dart';
@@ -22,6 +24,8 @@ class _MobileScaffolState extends State<MobileScaffol> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<LiquidPullToRefreshState> _refreshIndicatorKey =
       GlobalKey<LiquidPullToRefreshState>();
+
+  bool isListView = true;
 
   ScrollController? _scrollController;
 
@@ -91,7 +95,7 @@ class _MobileScaffolState extends State<MobileScaffol> {
                 Text(
                   "FakeStore",
                   style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 20,
                       fontWeight: FontWeight.w600,
                       color: Colors.grey[800]),
                 ),
@@ -127,6 +131,32 @@ class _MobileScaffolState extends State<MobileScaffol> {
         elevation: 0,
         actions: [
           Padding(
+              padding: const EdgeInsets.only(right: 0.0, bottom: 14, top: 14),
+              child: NeumorphicButton(
+                  tooltip: "Menu",
+                  onPressed: () {
+                    setState(() {
+                      isListView = !isListView;
+
+                      print("Grid/List Button pressed $isListView");
+                    });
+                  },
+                  provideHapticFeedback: true,
+                  style: NeumorphicStyle(
+                      depth: 5,
+                      surfaceIntensity: 0.3,
+                      intensity: 0.8,
+                      lightSource: LightSource.topLeft,
+                      shadowLightColor: Colors.white.withOpacity(0.6),
+                      color: Colors.white,
+                      shape: NeumorphicShape.convex,
+                      boxShape: const NeumorphicBoxShape.circle()),
+                  child: Icon(
+                    isListView == false ? Icons.menu : Icons.grid_view_outlined,
+                    color: Colors.grey[800],
+                    size: 30,
+                  ))),
+          Padding(
               padding: const EdgeInsets.only(right: 5.0, bottom: 14, top: 14),
               child: NeumorphicButton(
                 tooltip: "Menu",
@@ -150,7 +180,7 @@ class _MobileScaffolState extends State<MobileScaffol> {
                     shape: NeumorphicShape.convex,
                     boxShape: const NeumorphicBoxShape.circle()),
                 child: Icon(
-                  Icons.menu_rounded,
+                  Icons.menu_open_outlined,
                   color: Colors.grey[800],
                   size: 30,
                 ),
@@ -179,38 +209,109 @@ class _MobileScaffolState extends State<MobileScaffol> {
                     ? const Center(
                         child: CircularProgressIndicator(),
                       )
-                    : ListView.builder(
-                        controller: _scrollController,
-                        itemCount: itemController.dataModels.length,
-                        itemBuilder: (context, index) {
-                          final itemdata = itemController.dataModels[index];
-                          return Padding(
+                    : isListView == false
+                        ? Padding(
                             padding: const EdgeInsets.only(
-                                left: 10, right: 10, top: 10),
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => ItemDetailsView(
-                                          titlee: itemdata.title.toString(),
-                                          productId: itemdata.id,
-                                          description:
-                                              itemdata.description.toString(),
-                                          image: itemdata.image.toString(),
-                                          price: itemdata.price.toString(),
-                                          rating:
-                                              itemdata.rating!.rate.toString(),
-                                          category:
-                                              itemdata.category.toString(),
-                                        )));
-                              },
-                              child: MyTiles(
-                                  image: itemdata.image.toString(),
-                                  title: itemdata.title.toString(),
-                                  price: itemdata.price.toString(),
-                                  rate: itemdata.rating!.rate.toString()),
+                                top: 8.0, left: 2, right: 2),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(25)),
+                              child: GridView.builder(
+                                physics: BouncingScrollPhysics(),
+                                gridDelegate:
+                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                        mainAxisExtent: 250,
+                                        crossAxisSpacing: 10,
+                                        mainAxisSpacing: 10,
+                                        crossAxisCount: 2),
+                                itemCount: itemController.dataModels.length,
+                                itemBuilder: (context, index) {
+                                  final itemData4Grids =
+                                      itemController.dataModels[index];
+                                  return Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: InkWell(
+                                        onTap: () {
+                                          Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ItemDetailsView(
+                                                        titlee: itemData4Grids
+                                                            .title
+                                                            .toString(),
+                                                        productId:
+                                                            itemData4Grids.id,
+                                                        description:
+                                                            itemData4Grids
+                                                                .description
+                                                                .toString(),
+                                                        image: itemData4Grids
+                                                            .image
+                                                            .toString(),
+                                                        price: itemData4Grids
+                                                            .price
+                                                            .toString(),
+                                                        rating: itemData4Grids
+                                                            .rating!.rate
+                                                            .toString(),
+                                                        category: itemData4Grids
+                                                            .category
+                                                            .toString(),
+                                                      )));
+                                        },
+                                        child: GridMode(
+                                            image:
+                                                itemData4Grids.image.toString(),
+                                            title:
+                                                itemData4Grids.title.toString(),
+                                            price:
+                                                itemData4Grids.price.toString(),
+                                            rate: itemData4Grids.rating!.rate
+                                                .toString()),
+                                      ));
+                                },
+                              ),
                             ),
-                          );
-                        });
+                          )
+                        : ListView.builder(
+                            physics: BouncingScrollPhysics(),
+                            controller: _scrollController,
+                            itemCount: itemController.dataModels.length,
+                            itemBuilder: (context, index) {
+                              final itemdata = itemController.dataModels[index];
+                              return Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 10, right: 10, top: 10),
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ItemDetailsView(
+                                                  titlee:
+                                                      itemdata.title.toString(),
+                                                  productId: itemdata.id,
+                                                  description: itemdata
+                                                      .description
+                                                      .toString(),
+                                                  image:
+                                                      itemdata.image.toString(),
+                                                  price:
+                                                      itemdata.price.toString(),
+                                                  rating: itemdata.rating!.rate
+                                                      .toString(),
+                                                  category: itemdata.category
+                                                      .toString(),
+                                                )));
+                                  },
+                                  child: MyTiles(
+                                      image: itemdata.image.toString(),
+                                      title: itemdata.title.toString(),
+                                      price: itemdata.price.toString(),
+                                      rate: itemdata.rating!.rate.toString()),
+                                ),
+                              );
+                            });
               })),
         ),
       ),
