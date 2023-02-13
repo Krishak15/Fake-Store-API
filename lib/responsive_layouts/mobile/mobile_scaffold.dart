@@ -137,8 +137,6 @@ class _MobileScaffolState extends State<MobileScaffol> {
                   onPressed: () {
                     setState(() {
                       isListView = !isListView;
-
-                      print("Grid/List Button pressed $isListView");
                     });
                   },
                   provideHapticFeedback: true,
@@ -217,7 +215,7 @@ class _MobileScaffolState extends State<MobileScaffol> {
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(25)),
                               child: GridView.builder(
-                                physics: BouncingScrollPhysics(),
+                                physics: const BouncingScrollPhysics(),
                                 gridDelegate:
                                     const SliverGridDelegateWithFixedCrossAxisCount(
                                         mainAxisExtent: 250,
@@ -274,7 +272,7 @@ class _MobileScaffolState extends State<MobileScaffol> {
                             ),
                           )
                         : ListView.builder(
-                            physics: BouncingScrollPhysics(),
+                            physics: const BouncingScrollPhysics(),
                             controller: _scrollController,
                             itemCount: itemController.dataModels.length,
                             itemBuilder: (context, index) {
