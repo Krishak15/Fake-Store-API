@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -24,7 +22,7 @@ class GridMode extends StatelessWidget {
       decoration: BoxDecoration(boxShadow: [
         BoxShadow(
             blurRadius: 7,
-            offset: Offset(0, 3),
+            offset: const Offset(0, 3),
             color: Colors.grey.withOpacity(0.6))
       ], color: Colors.white, borderRadius: BorderRadius.circular(25)),
       height: 150,
@@ -37,7 +35,7 @@ class GridMode extends StatelessWidget {
               decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
-                        offset: Offset(0, 0),
+                        offset: const Offset(0, 0),
                         blurRadius: 10,
                         color: Colors.grey.withOpacity(0.3))
                   ],
@@ -51,7 +49,7 @@ class GridMode extends StatelessWidget {
             padding: const EdgeInsets.only(left: 8.0, right: 8, bottom: 5),
             child: Row(
               children: [
-                Container(
+                SizedBox(
                   width: 150,
                   child: Text(
                     title,
@@ -72,7 +70,8 @@ class GridMode extends StatelessWidget {
               children: [
                 Text(
                   "\$$price",
-                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w500, fontSize: 16),
                 ),
                 Row(
                   children: [
