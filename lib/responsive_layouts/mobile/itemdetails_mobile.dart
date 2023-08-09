@@ -1,6 +1,7 @@
 import 'package:fake_store/constants.dart';
 import 'package:flip_card/flip_card.dart';
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+
+import 'package:flutter_neumorphic_plus/flutter_neumorphic.dart';
 
 import 'package:iconsax/iconsax.dart';
 import 'package:share_plus/share_plus.dart';

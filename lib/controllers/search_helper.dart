@@ -4,8 +4,8 @@ import 'package:fake_store/responsive_layouts/mobile/itemdetails_mobile.dart';
 
 import 'package:fake_store/services/services.dart';
 import 'package:fake_store/utils/tiles.dart';
-
 import 'package:flutter/material.dart';
+
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:iconsax/iconsax.dart';

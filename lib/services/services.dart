@@ -15,6 +15,8 @@ class DataServices {
     try {
       if (response.statusCode == 200) {
         lData = jsonDecode(response.body);
+
+        //search
         results = lData.map((e) => DataModel.fromJson(e)).toList();
 
         //for search helper

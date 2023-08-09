@@ -6,7 +6,9 @@ import 'package:fake_store/controllers/search_helper.dart';
 import 'package:fake_store/responsive_layouts/mobile/itemdetails_mobile.dart';
 import 'package:fake_store/utils/grids.dart';
 import 'package:fake_store/utils/tiles.dart';
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:flutter/material.dart';
+
+import 'package:flutter_neumorphic_plus/flutter_neumorphic.dart';
 
 import 'package:get/get.dart';
 
